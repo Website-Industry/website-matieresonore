@@ -18,7 +18,7 @@ officielle. Ghost-Note est mentionné dans le about, pas mis en avant partout.
 ## Stack technique
 
 - Framework : Next.js (App Router)
-- CMS : Keystatic (fichiers Markdown dans le repo, interface locale)
+- Contenu Blog : fichiers MDX dans /content/articles/ (frontmatter + corps MDX, écrits directement en code — pas de CMS/UI d'admin)
 - Deploy : Vercel
 - Repo : https://github.com/Website-Industry/website-matieresonore
 
@@ -33,7 +33,7 @@ Trois niveaux : une page d'accueil qui relie tout, et deux sections distinctes.
 
 ### Blog
 - Articles écrits : avis, réflexions, tutos, critiques, analyses
-- Géré par Keystatic (fichiers Markdown dans /content/articles/)
+- Fichiers MDX écrits à la main dans /content/articles/ (frontmatter : title, date, tags, excerpt + corps MDX pouvant embarquer des composants React)
 - Tags pour organiser les thématiques : théorie, IA, critique, sample, tuto...
 - Intention : écrire, partager un point de vue, fidéliser
 

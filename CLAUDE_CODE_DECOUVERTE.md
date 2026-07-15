@@ -59,6 +59,36 @@ git status
 
 ---
 
+## 🚀 Deuxième Session (15/07/2026)
+
+### Contexte
+Remplacement de Keystatic (CMS avec UI d'admin) par des articles MDX écrits directement en fichiers : Marc est développeur et préfère tout garder en code plutôt que de passer par un CMS.
+
+### Déroulé avec Claude Code
+1. **État des lieux** : avant toute action, Claude a résumé le projet en lisant CLAUDE.md, PROJET_CONTEXTE.md et la structure du repo.
+2. **Question ouverte** : "on garde Keystatic ou pas ?" a été traitée comme une question exploratoire — Claude a donné un avis en 2-3 phrases avec le compromis principal, sans partir direct en implémentation.
+3. **Clarification** : `AskUserQuestion` utilisé pour trancher MDX (JSX dans les articles) vs Markdown simple, plutôt que de deviner.
+4. **Mode Plan** : `EnterPlanMode` activé avant de toucher au code (plusieurs fichiers, choix d'outillage). Claude a délégué la recherche technique (gray-matter + next-mdx-remote vs `@next/mdx`, compatibilité Next 16 / React 19) à un sous-agent "Plan" pour valider l'approche avant d'écrire le plan final.
+5. **Exécution** : retrait de Keystatic (fichiers + dépendances npm), ajout de `gray-matter` + `next-mdx-remote`, création de `lib/articles.ts` et des pages `/blog` + `/blog/[slug]`, migration du fichier de test en `.mdx`.
+6. **Vérification réelle** : `npm run build` (a révélé un cache `.next` obsolète référençant l'ancienne route Keystatic, corrigé avec `rm -rf .next`), puis serveur de dev lancé en arrière-plan et `curl` sur les pages générées pour vérifier le HTML réel — pas juste "ça compile".
+
+### Bug trouvé grâce au test réel (pas juste au build)
+Le style JSX (`style={{ color: '#0096c7' }}`) d'un article ne s'affichait pas malgré un build réussi. En inspectant le code source de `next-mdx-remote`, Claude a trouvé que la librairie bloque par défaut les expressions JavaScript dans le MDX (option `blockJS: true`) — une protection anti-XSS pensée pour du contenu distant non fiable, inutile ici puisque les articles sont écrits à la main dans le repo. Correction : `options={{ blockJS: false }}` sur `<MDXRemote>`.
+→ **Leçon** : un build qui passe ne garantit pas qu'une fonctionnalité marche. Toujours vérifier le rendu réel, surtout avec des libs qui ont des défauts de sécurité silencieux.
+
+### Permissions Claude Code
+- `.claude/settings.local.json` contient `permissions.allow`. Attention à la syntaxe : `"Write(*)"` n'autorise pas fiablement tous les usages de l'outil — pour un outil fichier, la forme "tout autoriser" est le nom nu (`"Write"`), sans parenthèses.
+- Claude ne peut pas élargir ses propres permissions tout seul, même avec un accord oral de l'utilisateur : le "classificateur auto mode" bloque explicitement l'auto-modification de `settings.local.json`. Il faut éditer ce fichier soi-même.
+
+### Commandes / outils découverts
+- `EnterPlanMode` / `ExitPlanMode` : pour aligner sur une approche avant un changement non trivial
+- `AskUserQuestion` : pour trancher un choix technique avec des options claires plutôt que deviner
+- Agent de type `Plan` (via l'outil Agent) : sous-agent dédié à la conception d'un plan détaillé, utile pour valider des choix de librairies avant d'écrire le code
+- `Bash` avec `run_in_background: true` + boucle `until grep -q "Ready" ...` : pour attendre qu'un serveur de dev soit prêt sans bloquer la conversation
+- `TaskStop` : pour arrêter proprement un process en arrière-plan (ex. serveur de dev) une fois la vérification terminée
+
+---
+
 ## 📝 Notes et Apprentissages
 
 ### Points Clés
@@ -109,6 +139,11 @@ git status
 - **Action**: Création du fichier de trace
 - **Apprentissage**: Exploration initiale du projet
 - **Statut**: Projet initialisé
+
+### Session 2 - 15/07/2026
+- **Action**: Retrait de Keystatic, mise en place d'une infra MDX pour le Blog (lib/articles.ts, pages /blog)
+- **Apprentissage**: Mode Plan + AskUserQuestion pour cadrer une décision d'architecture ; toujours vérifier le rendu réel après un build réussi ; limites des permissions auto-modifiables par Claude
+- **Statut**: Migration terminée et vérifiée (build + test du serveur de dev)
 
 ---
 
