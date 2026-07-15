@@ -59,7 +59,22 @@ git status
 
 ---
 
-## 🚀 Deuxième Session (15/07/2026)
+## 🚀 Deuxième Session (14/04/2026)
+
+### Contexte
+Mise en place technique du projet, à la suite de la documentation initiale (Session 1).
+
+### Ce qui a été fait
+- Scaffold Next.js (App Router, TypeScript, Tailwind CSS v4) via `create-next-app`
+- Ajout de Keystatic comme CMS pour le Blog : `keystatic.config.ts` (collection "articles" avec title/date/tags/excerpt/body), route API `/api/keystatic`, UI d'admin `/keystatic`
+- Premier article de test créé via Keystatic (`content/articles/test-d-article.mdoc`)
+- Commit `1eab0e6` : 20 fichiers, ~6700 lignes (essentiellement config Next.js/Tailwind/TypeScript et dépendances)
+
+→ Ce choix de CMS (Keystatic) sera reconsidéré et retiré dès la Session 3, une fois le besoin réel confronté à la pratique (voir plus bas).
+
+---
+
+## 🚀 Troisième Session (15/07/2026)
 
 ### Contexte
 Remplacement de Keystatic (CMS avec UI d'admin) par des articles MDX écrits directement en fichiers : Marc est développeur et préfère tout garder en code plutôt que de passer par un CMS.
@@ -135,12 +150,17 @@ Le style JSX (`style={{ color: '#0096c7' }}`) d'un article ne s'affichait pas ma
 
 ## 📈 Historique des Sessions
 
-### Session 1 - 11/02/2026
-- **Action**: Création du fichier de trace
+### Session 1 - 14/04/2026
+- **Action**: Création de la documentation projet (CLAUDE.md, PROJET_CONTEXTE.md, ce fichier de trace)
 - **Apprentissage**: Exploration initiale du projet
-- **Statut**: Projet initialisé
+- **Statut**: Documentation posée, projet encore sans code
 
-### Session 2 - 15/07/2026
+### Session 2 - 14/04/2026
+- **Action**: Scaffold Next.js (App Router, TypeScript, Tailwind v4) + ajout de Keystatic comme CMS pour le Blog
+- **Apprentissage**: Premier choix d'architecture (CMS avec UI d'admin), remis en question à l'usage dès la session suivante
+- **Statut**: Projet techniquement démarré, Keystatic configuré avec un article de test
+
+### Session 3 - 15/07/2026
 - **Action**: Retrait de Keystatic, mise en place d'une infra MDX pour le Blog (lib/articles.ts, pages /blog)
 - **Apprentissage**: Mode Plan + AskUserQuestion pour cadrer une décision d'architecture ; toujours vérifier le rendu réel après un build réussi ; limites des permissions auto-modifiables par Claude
 - **Statut**: Migration terminée et vérifiée (build + test du serveur de dev)
