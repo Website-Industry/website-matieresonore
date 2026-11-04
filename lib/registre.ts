@@ -54,6 +54,14 @@ export const registre: EntreePage[] = [
     extrait: '21 modes, chacun identifié par une paire d\'accords : un accord de 7e sur le degré I, une triade sur le degré II.',
     tags: ['théorie', 'modes', 'harmonie'],
   },
+  {
+    slug: 'simulateur-repliement',
+    type: ['labo'],
+    titre: 'Le repliement, à voir et à entendre',
+    date: '2026-11-04',
+    extrait: "On règle un son et une fréquence d'échantillonnage : au-delà de la fréquence de Nyquist, la fréquence fantôme apparaît, à l'écran et à l'oreille.",
+    tags: ['son numérique', 'technique'],
+  },
 ]
 
 export function listerParType(type: TypePage): EntreePage[] {
