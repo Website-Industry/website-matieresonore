@@ -26,6 +26,9 @@ Le pourquoi éditorial vit hors du dépôt, dans le projet Claude « Matière So
 
 - Français partout : UI, commits, commentaires
 - Commits conventionnels en français, tous les préfixes classiques (`feat:`, `fix:`, `docs:`, `refactor:`, `chore:`…), plus `content:` pour les publications
+- Une feature, une branche, une PR. Branche et PR nommées clairement d'après la feature (par exemple `feat/accueil-ondes`, PR « feat: cercles concentriques animés sur l'accueil »), jamais un nom généré
+- Une fois une PR mergée, sa branche est terminée : tout nouveau travail part d'une nouvelle branche créée depuis `main` à jour, jamais d'un push sur une branche déjà mergée
+- En fin de travail sur une feature, ouvrir la PR (ou rappeler à Marc de le faire) et vérifier qu'elle contient bien tous les commits
 - MVP d'abord : on ne complexifie que si un vrai besoin l'exige
 - Terrain d'apprentissage Claude Code : avant chaque action importante, expliquer ce qui va être fait et pourquoi
 - Une session de travail donne un nouveau fichier dans `journal/`, quand Marc le demande
