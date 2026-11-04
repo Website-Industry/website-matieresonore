@@ -29,7 +29,7 @@ export function metadataPour(slug: string): Metadata {
   const entree = registre.find((e) => e.slug === slug)
   if (!entree) throw new Error(`Page absente de lib/registre.ts : ${slug}`)
   return {
-    title: `${entree.titre} — Matière Sonore`,
+    title: `${entree.titre} | Matière Sonore`,
     description: entree.extrait,
   }
 }

@@ -17,7 +17,7 @@ Le bleu justifie la couleur. Les ondes SVG justifient les formes.
 ## Textes de référence
 
 - Titre principal : "Plongeons dans la musique."
-- Tagline : "Ressentir ce qu'on ressent. Comprendre ce qu'on ressent."
+- Tagline : "Ressentir ce qu'on comprend. Comprendre ce qu'on ressent."
 - Sous-titre de position : "Un carnet d'immersions sonores par Marc Charton"
 
 ## Ambiance et typographie

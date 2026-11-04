@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { cheminDe, listerParType } from '@/lib/registre'
 
 export const metadata = {
-  title: 'Blog — Matière Sonore',
+  title: 'Blog | Matière Sonore',
 }
 
 function formatDate(dateStr: string) {
@@ -36,7 +36,7 @@ export default function BlogPage() {
             className="mt-4 text-[var(--text-muted)]"
             style={{ fontFamily: 'var(--font-dm-sans)' }}
           >
-            Avis, réflexions, tutos, analyses — la musique en mots.
+            Avis, réflexions, tutos, analyses : la musique en mots.
           </p>
         </div>
 

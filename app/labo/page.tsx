@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { cheminDe, listerParType } from '@/lib/registre'
 
 export const metadata = {
-  title: 'Labo — Matière Sonore',
+  title: 'Labo | Matière Sonore',
 }
 
 export default function LaboPage() {

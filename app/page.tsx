@@ -58,7 +58,7 @@ export default function Home() {
         </div>
         <div className="relative mx-auto max-w-4xl">
           <h1
-            className="text-5xl font-extrabold leading-tight tracking-tight text-[var(--text-primary)] md:text-7xl"
+            className="text-[length:min(10.4vw,3rem)] font-extrabold leading-tight tracking-tight text-[var(--text-primary)] md:text-7xl"
             style={{ fontFamily: 'var(--font-syne)' }}
           >
             Plongeons dans la musique.
@@ -67,7 +67,7 @@ export default function Home() {
             className="mt-6 text-lg text-[var(--text-muted)]"
             style={{ fontFamily: 'var(--font-dm-sans)' }}
           >
-            Ressentir ce qu'on ressent. Comprendre ce qu'on ressent.
+            Ressentir ce qu'on comprend. Comprendre ce qu'on ressent.
           </p>
           <p
             className="mt-2 text-sm font-light text-[var(--text-muted)]"
