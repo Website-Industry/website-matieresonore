@@ -42,12 +42,12 @@ function Marque() {
 
 export default function EnTete() {
   return (
-    <header className="sticky top-0 z-10 border-b border-[var(--line)] bg-[rgba(247,244,239,0.88)] px-6 py-3.5 backdrop-blur">
-      <div className="mx-auto flex max-w-[72rem] items-center justify-between gap-4">
+    <header className="sticky top-0 z-10 border-b border-[var(--line)] bg-[rgba(247,244,239,0.88)] px-4 py-3.5 backdrop-blur min-[380px]:px-6">
+      <div className="mx-auto flex max-w-[72rem] items-center justify-between gap-2">
         <Link
           href="/"
           aria-label="Matière Sonore, accueil"
-          className={`flex items-center gap-2 whitespace-nowrap text-base font-extrabold text-[var(--text-primary)] min-[760px]:text-[1.15rem] ${focusClavier}`}
+          className={`flex items-center gap-1 whitespace-nowrap min-[380px]:gap-2 text-sm font-extrabold text-[var(--text-primary)] min-[380px]:text-base min-[760px]:text-[1.15rem] ${focusClavier}`}
           style={{ fontFamily: 'var(--font-syne)' }}
         >
           <Marque />
@@ -59,7 +59,7 @@ export default function EnTete() {
             <Link
               key={lien.href}
               href={lien.href}
-              className={`group relative inline-block px-2 py-1 font-bold text-[var(--text-primary)] min-[760px]:px-3 ${focusClavier}`}
+              className={`group relative inline-block px-1 py-1 text-sm font-bold text-[var(--text-primary)] min-[380px]:text-base min-[760px]:px-3 ${focusClavier}`}
               style={{ fontFamily: 'var(--font-syne)' }}
             >
               {lien.libelle}
