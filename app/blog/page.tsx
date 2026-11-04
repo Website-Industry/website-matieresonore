@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getAllArticles } from '@/lib/articles'
+import { cheminDe, listerParType } from '@/lib/registre'
 
 export const metadata = {
   title: 'Blog — Matière Sonore',
@@ -15,7 +15,7 @@ function formatDate(dateStr: string) {
 }
 
 export default function BlogPage() {
-  const articles = getAllArticles()
+  const articles = listerParType('blog')
 
   return (
     <main className="px-6 py-16 md:py-24">
@@ -30,7 +30,7 @@ export default function BlogPage() {
           </h1>
           <div
             className="mt-3 h-1 w-10 rounded"
-            style={{ backgroundColor: 'var(--accent-orange)' }}
+            style={{ backgroundColor: 'var(--accent-blog)' }}
           />
           <p
             className="mt-4 text-[var(--text-muted)]"
@@ -50,7 +50,7 @@ export default function BlogPage() {
             {articles.map((article) => (
               <Link
                 key={article.slug}
-                href={`/blog/${article.slug}`}
+                href={cheminDe(article)}
                 className="group flex cursor-pointer flex-col rounded-xl bg-[var(--bg-card)] p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
               >
                 {article.tags.length > 0 && (
@@ -58,8 +58,8 @@ export default function BlogPage() {
                     {article.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full px-2 py-0.5 text-xs font-medium text-white"
-                        style={{ backgroundColor: 'var(--accent-orange)' }}
+                        className="rounded-full border px-2 py-0.5 text-xs font-medium"
+                        style={{ borderColor: 'var(--accent-blog)', color: 'var(--accent-blog-ink)' }}
                       >
                         {tag}
                       </span>
@@ -71,14 +71,14 @@ export default function BlogPage() {
                   className="mb-2 text-lg font-bold leading-snug text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--accent-blue)]"
                   style={{ fontFamily: 'var(--font-syne)' }}
                 >
-                  {article.title}
+                  {article.titre}
                 </h2>
 
                 <p
                   className="mb-4 flex-1 text-sm leading-relaxed text-[var(--text-muted)]"
                   style={{ fontFamily: 'var(--font-dm-sans)' }}
                 >
-                  {article.excerpt}
+                  {article.extrait}
                 </p>
 
                 <time className="text-xs text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>

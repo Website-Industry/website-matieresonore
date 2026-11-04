@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getAllArticles } from '@/lib/articles'
+import { cheminDe, listerParType } from '@/lib/registre'
 
 function ConcentricCircles({
   color = '#0096c7',
@@ -46,7 +46,8 @@ function formatDate(dateStr: string) {
 }
 
 export default function Home() {
-  const articles = getAllArticles().slice(0, 3)
+  const articles = listerParType('blog').slice(0, 3)
+  const pagesLabo = listerParType('labo').slice(0, 3)
 
   return (
     <main>
@@ -87,7 +88,7 @@ export default function Home() {
             Blog
             <span
               className="inline-block h-1 w-8 rounded"
-              style={{ backgroundColor: 'var(--accent-orange)' }}
+              style={{ backgroundColor: 'var(--accent-blog)' }}
             />
           </h2>
 
@@ -100,7 +101,7 @@ export default function Home() {
               {articles.map((article) => (
                 <Link
                   key={article.slug}
-                  href={`/blog/${article.slug}`}
+                  href={cheminDe(article)}
                   className="group flex cursor-pointer flex-col rounded-xl bg-[var(--bg-card)] p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
                 >
                   {article.tags.length > 0 && (
@@ -108,8 +109,8 @@ export default function Home() {
                       {article.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full px-2 py-0.5 text-xs font-medium text-white"
-                          style={{ backgroundColor: 'var(--accent-orange)' }}
+                          className="rounded-full border px-2 py-0.5 text-xs font-medium"
+                          style={{ borderColor: 'var(--accent-blog)', color: 'var(--accent-blog-ink)' }}
                         >
                           {tag}
                         </span>
@@ -121,14 +122,14 @@ export default function Home() {
                     className="mb-2 text-lg font-bold leading-snug text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--accent-blue)]"
                     style={{ fontFamily: 'var(--font-syne)' }}
                   >
-                    {article.title}
+                    {article.titre}
                   </h3>
 
                   <p
                     className="mb-4 flex-1 text-sm leading-relaxed text-[var(--text-muted)]"
                     style={{ fontFamily: 'var(--font-dm-sans)' }}
                   >
-                    {article.excerpt}
+                    {article.extrait}
                   </p>
 
                   <time className="text-xs text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
@@ -143,7 +144,7 @@ export default function Home() {
             <Link
               href="/blog"
               className="text-sm font-medium transition-opacity duration-200 hover:opacity-70"
-              style={{ color: 'var(--accent-orange)', fontFamily: 'var(--font-dm-sans)' }}
+              style={{ color: 'var(--accent-blog-ink)', fontFamily: 'var(--font-dm-sans)' }}
             >
               Voir tous les articles →
             </Link>
@@ -161,14 +162,52 @@ export default function Home() {
         </div>
         <div className="relative mx-auto max-w-4xl">
           <h2
-            className="mb-4 text-2xl font-bold text-white"
+            className="mb-4 flex items-center gap-3 text-2xl font-bold text-white"
             style={{ fontFamily: 'var(--font-syne)' }}
           >
             Labo
+            <span
+              className="inline-block h-1 w-8 rounded"
+              style={{ backgroundColor: 'var(--accent-labo)' }}
+            />
           </h2>
-          <p className="max-w-md text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Des pages expérimentales arrivent bientôt.
-          </p>
+
+          {pagesLabo.length === 0 ? (
+            <p className="max-w-md text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+              Des pages expérimentales arrivent bientôt.
+            </p>
+          ) : (
+            <ul className="space-y-4">
+              {pagesLabo.map((page) => (
+                <li key={page.slug}>
+                  <Link href={cheminDe(page)} className="group block max-w-md">
+                    <span
+                      className="block font-bold text-white transition-opacity duration-200 group-hover:opacity-70"
+                      style={{ fontFamily: 'var(--font-syne)' }}
+                    >
+                      {page.titre}
+                    </span>
+                    <span
+                      className="block text-sm text-white/70"
+                      style={{ fontFamily: 'var(--font-dm-sans)' }}
+                    >
+                      {page.extrait}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div className="mt-8">
+            <Link
+              href="/labo"
+              className="text-sm font-medium transition-opacity duration-200 hover:opacity-70"
+              style={{ color: 'var(--accent-labo)', fontFamily: 'var(--font-dm-sans)' }}
+            >
+              Voir tout le Labo →
+            </Link>
+          </div>
         </div>
       </section>
     </main>
