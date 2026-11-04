@@ -28,7 +28,8 @@ Le pourquoi éditorial vit hors du dépôt, dans le projet Claude « Matière So
 - Commits conventionnels en français, tous les préfixes classiques (`feat:`, `fix:`, `docs:`, `refactor:`, `chore:`…), plus `content:` pour les publications
 - MVP d'abord : on ne complexifie que si un vrai besoin l'exige
 - Terrain d'apprentissage Claude Code : avant chaque action importante, expliquer ce qui va être fait et pourquoi
-- Entrée de journal quand Marc le demande
+- Une session de travail donne un nouveau fichier dans `journal/`, quand Marc le demande
+- Source unique : une information vit à un seul endroit. Le technique dans le dépôt, le pourquoi éditorial dans le projet Claude, vers lequel on pointe sans recopier
 
 ## Skills
 
@@ -54,4 +55,5 @@ Le chargement automatique n'existe pas partout (les fils de projet cloud l'ignor
 - `.claude/rules/labo.md` : chargée en travaillant sur `app/labo/**`. À lire avant de créer ou modifier une page du Labo
 - `.claude/settings.json` : permissions, chargées au démarrage. À lire pour savoir ce qui est autorisé ou refusé
 - `journal/` : historique et apprentissage. À ne lire que sur demande
-- Drive pro de Marc, dossier `Outils / Claude / Projet Claude · Ghost Note - Matière Sonore /` : copie exportée de la mémoire et du contexte du projet Claude, à sens unique, jamais modifiée à la main. À ne lire que pour le pourquoi éditorial
+- `A-FAIRE.md` : reste à faire technique. À lire avant de proposer la suite
+- Drive pro de Marc, dossier `Outils / Claude / Projet Claude · Ghost Note - Matière Sonore /` : copie exportée de la mémoire et du contexte du projet Claude, à sens unique, jamais modifiée à la main. À ne lire que pour le pourquoi éditorial. Le même dossier contient les briefs de session, nommés `brief-AAAA-MM-JJ.md`
