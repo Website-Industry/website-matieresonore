@@ -13,7 +13,24 @@ export type EntreePage = {
   tags: string[]
 }
 
-export const registre: EntreePage[] = []
+export const registre: EntreePage[] = [
+  {
+    slug: 'ia-et-musique',
+    type: ['blog'],
+    titre: "L'IA ne détruit pas la musique. Le système s'en chargeait déjà.",
+    date: '2026-11-04',
+    extrait: "L'IA n'a pas inventé la logique du volume : elle arrive dans une industrie qui protégeait déjà mal les artistes.",
+    tags: ['IA', 'industrie musicale', 'opinion'],
+  },
+  {
+    slug: 'jeu-modes',
+    type: ['labo'],
+    titre: 'Reconnaître un mode avec deux accords',
+    date: '2026-11-04',
+    extrait: '21 modes, chacun identifié par une paire d\'accords : un accord de 7e sur le degré I, une triade sur le degré II.',
+    tags: ['théorie', 'modes', 'harmonie'],
+  },
+]
 
 export function listerParType(type: TypePage): EntreePage[] {
   return registre
