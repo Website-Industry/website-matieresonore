@@ -12,6 +12,7 @@
   --accent-blog-ink: #c2410c;
   --accent-labo: #1fb866;
   --accent-labo-ink: #0f7a43;
+  --line: rgba(13, 26, 46, 0.1);
 }
 
 @theme inline {
@@ -26,6 +27,7 @@
   --color-accent-blog-ink: var(--accent-blog-ink);
   --color-accent-labo: var(--accent-labo);
   --color-accent-labo-ink: var(--accent-labo-ink);
+  --color-line: var(--line);
   --font-display: var(--font-syne);
   --font-body: var(--font-dm-sans);
 }
