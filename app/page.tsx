@@ -1,40 +1,6 @@
 import Link from 'next/link'
+import { OndeConcentrique } from '@/components/OndeConcentrique'
 import { cheminDe, listerParType, type EntreePage, type TypePage } from '@/lib/registre'
-
-function ConcentricCircles({
-  color = '#0096c7',
-  opacity = 0.07,
-  size = 600,
-}: {
-  color?: string
-  opacity?: number
-  size?: number
-}) {
-  const c = size / 2
-  const radii = [c * 0.2, c * 0.37, c * 0.54, c * 0.71, c * 0.88]
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {radii.map((r) => (
-        <circle
-          key={r}
-          cx={c}
-          cy={c}
-          r={r}
-          stroke={color}
-          strokeOpacity={opacity}
-          strokeWidth="1.5"
-        />
-      ))}
-    </svg>
-  )
-}
 
 function formatDate(dateStr: string) {
   const [year, month, day] = dateStr.split('-').map(Number)
@@ -144,8 +110,8 @@ export default function Home() {
     <main>
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-10 pt-12 min-[760px]:pb-14 min-[760px]:pt-[72px]">
-        <div className="pointer-events-none absolute right-[-200px] top-1/2 -translate-y-1/2">
-          <ConcentricCircles />
+        <div className="pointer-events-none absolute right-[-250px] top-1/2 -translate-y-1/2">
+          <OndeConcentrique />
         </div>
         <div className="relative mx-auto max-w-[72rem]">
           <h1
