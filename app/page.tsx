@@ -1,65 +1,176 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { getAllArticles } from '@/lib/articles'
+
+function ConcentricCircles({
+  color = '#0096c7',
+  opacity = 0.07,
+  size = 600,
+}: {
+  color?: string
+  opacity?: number
+  size?: number
+}) {
+  const c = size / 2
+  const radii = [c * 0.2, c * 0.37, c * 0.54, c * 0.71, c * 0.88]
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {radii.map((r) => (
+        <circle
+          key={r}
+          cx={c}
+          cy={c}
+          r={r}
+          stroke={color}
+          strokeOpacity={opacity}
+          strokeWidth="1.5"
+        />
+      ))}
+    </svg>
+  )
+}
+
+function formatDate(dateStr: string) {
+  const [year, month, day] = dateStr.split('-').map(Number)
+  return new Date(year, month - 1, day).toLocaleDateString('fr-FR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
 
 export default function Home() {
+  const articles = getAllArticles().slice(0, 3)
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main>
+      {/* ── Hero ─────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden px-6 py-24 md:py-36 lg:py-48">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <ConcentricCircles />
+        </div>
+        <div className="relative mx-auto max-w-4xl">
+          <h1
+            className="text-5xl font-extrabold leading-tight tracking-tight text-[var(--text-primary)] md:text-7xl"
+            style={{ fontFamily: 'var(--font-syne)' }}
+          >
+            Plongeons dans la musique.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p
+            className="mt-6 text-lg text-[var(--text-muted)]"
+            style={{ fontFamily: 'var(--font-dm-sans)' }}
+          >
+            Ressentir ce qu'on ressent. Comprendre ce qu'on ressent.
+          </p>
+          <p
+            className="mt-2 text-sm font-light text-[var(--text-muted)]"
+            style={{ fontFamily: 'var(--font-dm-sans)' }}
+          >
+            Un carnet d'immersions sonores par Marc Charton
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      {/* ── Blog ─────────────────────────────────────────────── */}
+      <section className="px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-4xl">
+          <h2
+            className="mb-10 flex items-center gap-3 text-2xl font-bold text-[var(--text-primary)]"
+            style={{ fontFamily: 'var(--font-syne)' }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            Blog
+            <span
+              className="inline-block h-1 w-8 rounded"
+              style={{ backgroundColor: 'var(--accent-orange)' }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </h2>
+
+          {articles.length === 0 ? (
+            <p className="text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+              Aucun article pour l'instant.
+            </p>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {articles.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/blog/${article.slug}`}
+                  className="group flex cursor-pointer flex-col rounded-xl bg-[var(--bg-card)] p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                >
+                  {article.tags.length > 0 && (
+                    <div className="mb-3 flex flex-wrap gap-1">
+                      {article.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full px-2 py-0.5 text-xs font-medium text-white"
+                          style={{ backgroundColor: 'var(--accent-orange)' }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <h3
+                    className="mb-2 text-lg font-bold leading-snug text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--accent-blue)]"
+                    style={{ fontFamily: 'var(--font-syne)' }}
+                  >
+                    {article.title}
+                  </h3>
+
+                  <p
+                    className="mb-4 flex-1 text-sm leading-relaxed text-[var(--text-muted)]"
+                    style={{ fontFamily: 'var(--font-dm-sans)' }}
+                  >
+                    {article.excerpt}
+                  </p>
+
+                  <time className="text-xs text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                    {formatDate(article.date)}
+                  </time>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-10">
+            <Link
+              href="/blog"
+              className="text-sm font-medium transition-opacity duration-200 hover:opacity-70"
+              style={{ color: 'var(--accent-orange)', fontFamily: 'var(--font-dm-sans)' }}
+            >
+              Voir tous les articles →
+            </Link>
+          </div>
         </div>
-      </main>
-    </div>
-  );
+      </section>
+
+      {/* ── Labo ─────────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden px-6 py-20 md:py-28"
+        style={{ backgroundColor: 'var(--bg-dark)' }}
+      >
+        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2">
+          <ConcentricCircles color="#ffffff" opacity={0.04} size={500} />
+        </div>
+        <div className="relative mx-auto max-w-4xl">
+          <h2
+            className="mb-4 text-2xl font-bold text-white"
+            style={{ fontFamily: 'var(--font-syne)' }}
+          >
+            Labo
+          </h2>
+          <p className="max-w-md text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+            Des pages expérimentales arrivent bientôt.
+          </p>
+        </div>
+      </section>
+    </main>
+  )
 }
