@@ -56,4 +56,4 @@ Le chargement automatique n'existe pas partout (les fils de projet cloud l'ignor
 - `.claude/settings.json` : permissions, chargées au démarrage. À lire pour savoir ce qui est autorisé ou refusé
 - `journal/` : historique et apprentissage. À ne lire que sur demande
 - `A-FAIRE.md` : reste à faire technique. À lire avant de proposer la suite
-- Drive pro de Marc, dossier `Outils / Claude / Projet Claude · Ghost Note - Matière Sonore /` : copie exportée de la mémoire et du contexte du projet Claude, à sens unique, jamais modifiée à la main. À ne lire que pour le pourquoi éditorial. Le même dossier contient les briefs de session, nommés `brief-AAAA-MM-JJ.md`
+- `CLAUDE.local.md` (sur le poste de Marc, jamais versionné) : où trouver le pourquoi éditorial et les briefs de session, nommés `brief-AAAA-MM-JJ.md`. Absent : demander à Marc, ne rien deviner
