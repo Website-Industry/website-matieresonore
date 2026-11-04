@@ -23,7 +23,10 @@ Thumbs.db
 .idea/
 
 # Outils de dev local
-.claude/
+.claude/settings.local.json
+.claude/skills/ui-ux-pro-max/
+CLAUDE.local.md
+__pycache__/
 
 # Auto-généré par Next.js
 next-env.d.ts
