@@ -10,7 +10,7 @@ Le pourquoi éditorial vit hors du dépôt, dans le projet Claude « Matière So
 
 ## Stack et commandes
 
-- Next.js (App Router), TypeScript, Tailwind CSS, déployé sur Vercel
+- Next.js (App Router), TypeScript, Tailwind CSS, en ligne sur https://website-matieresonore.vercel.app, production sur `main`
 - Dépôt : https://github.com/Website-Industry/website-matieresonore
 - `npm install`, `npm run dev`, `npm run build`, `npm run start`
 
@@ -41,7 +41,9 @@ Le pourquoi éditorial vit hors du dépôt, dans le projet Claude « Matière So
 - Créer des fichiers de config complexes sans expliquer pourquoi
 - Sur-architecturer : simple et lisible avant tout
 - Inventer du faux contenu : toujours un placeholder explicite à la place
-- Mentionner Ghost-Note ailleurs que dans l'à propos
+- Mentionner Ghost-Note sur le site ailleurs que dans l'à propos
+- Pousser sur `main` ce qui ne compile pas : `main` part en production
+- Le tiret long (U+2014) dans les textes du site
 
 ## Où trouver quoi
 
@@ -52,3 +54,4 @@ Le chargement automatique n'existe pas partout (les fils de projet cloud l'ignor
 - `.claude/rules/labo.md` : chargée en travaillant sur `app/labo/**`. À lire avant de créer ou modifier une page du Labo
 - `.claude/settings.json` : permissions, chargées au démarrage. À lire pour savoir ce qui est autorisé ou refusé
 - `CLAUDE_CODE_DECOUVERTE.md` : journal d'apprentissage. À ne lire que sur demande
+- Drive pro de Marc, dossier `Outils / Claude / Projet Claude · Ghost Note - Matière Sonore /` : copie exportée de la mémoire et du contexte du projet Claude, à sens unique, jamais modifiée à la main. À ne lire que pour le pourquoi éditorial

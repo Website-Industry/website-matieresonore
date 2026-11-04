@@ -12,33 +12,37 @@
 ## Objectif de ce Document
 
 Trace d'apprentissage et de référence pour l'utilisation de Claude Code dans ce projet.
-Mis à jour après chaque session : ce qui a été fait, ce qui a été appris, les commandes utiles découvertes.
+Mis à jour quand Marc le demande : ce qui a été fait, ce qui a été appris, les commandes utiles découvertes.
 
 ---
 
-## État Actuel du Projet (15/07/2026)
+## État Actuel du Projet (04/11/2026)
 
 ### Ce qui est en place
-- Scaffold Next.js 16 (App Router, TypeScript, Tailwind CSS v4)
-- Infrastructure Blog : `lib/articles.ts` (gray-matter) + pages `/blog` et `/blog/[slug]` (next-mdx-remote)
-- Un article de test : `content/articles/test-d-article.mdx`
-- Identité visuelle définie dans CLAUDE.md (palette, typo, concept eau/ondes) — pas encore implémentée en CSS
+- Site en ligne sur https://website-matieresonore.vercel.app, production sur `main`
+- Accueil, `/blog` et `/labo`, alimentés par le registre `lib/registre.ts`
+- Tout le contenu en pages TSX libres : `app/blog/<slug>/page.tsx` et `app/labo/<slug>/page.tsx`
+- Deux premiers contenus : `/blog/ia-et-musique` et `/labo/jeu-modes`
+- Identité visuelle en CSS : palette, accents par type, Syne + DM Sans, cercles concentriques
+- Consignes versionnées : `CLAUDE.md`, `.claude/rules/`, `.claude/settings.json`
 
 ### Ce qui reste à faire
-- Page d'accueil : actuellement le template Next.js par défaut
-- Identité visuelle : CSS custom properties, polices Syne + DM Sans, ondes SVG
-- Section Labo : `app/labo/[slug]/page.tsx` (pas encore créée)
-- Vrai premier article de fond (le fichier de test est un placeholder)
-- Deploy Vercel
+- Trancher la liste des tags
+- Créer la page « À propos », seul endroit prévu pour mentionner Ghost-Note
+- Ajouter une navigation générale : pas d'en-tête pour l'instant
+- Ondes SVG : prévues par l'identité visuelle, pas encore présentes
+- Lint : ni script ni ESLint
+- Contraste du message d'attente sur le bandeau Labo (2,95:1)
+- Vérifier la licence du skill `ui-ux-pro-max`, ignoré par git et donc absent du cloud
 
 ### Stack technique arrêtée
 | Couche | Choix |
 |---|---|
 | Framework | Next.js 16 (App Router) |
-| Contenu Blog | Fichiers MDX dans `/content/articles/` |
-| Parsing MDX | `gray-matter` + `next-mdx-remote` |
+| Contenu | Pages TSX libres, sans gabarit |
+| Registre | `lib/registre.ts`, seule source des listes et des métadonnées |
 | Style | Tailwind CSS v4 |
-| Deploy | Vercel |
+| Deploy | Vercel, production sur `main` |
 | CMS | Aucun (tout en code) |
 
 ---
@@ -61,13 +65,25 @@ Keystatic sera retiré dès la session suivante : trop lourd pour un auteur uniq
 **Fait** : retrait de Keystatic, mise en place MDX (`gray-matter` + `next-mdx-remote`), création de `lib/articles.ts` et des pages `/blog` + `/blog/[slug]`, migration de l'article de test en `.mdx`.
 
 **Apprentissages Claude Code :**
-- `EnterPlanMode` avant tout changement d'architecture ; sous-agent `Plan` pour valider les choix de libs avant d'écrire le code
+- Mode plan avant tout changement d'architecture (`Maj+Tab` côté utilisateur ; `EnterPlanMode` est l'outil interne de Claude) ; sous-agent `Plan` pour valider les choix de libs avant d'écrire le code
 - `AskUserQuestion` pour trancher un choix (MDX vs Markdown) plutôt que deviner
 - `Bash run_in_background` + `TaskStop` pour lancer/arrêter un serveur de dev
 - Un build qui passe ≠ fonctionnalité qui marche : toujours vérifier le rendu réel (curl, dev server)
 - Cache `.next` obsolète après migration → `rm -rf .next` puis rebuild
 - `next-mdx-remote` bloque le JS dans le MDX par défaut (`blockJS: true`) — ajouter `options={{ blockJS: false }}` sur `<MDXRemote>` pour des articles écrits en local
 - Permissions : `"Write"` (nom nu) autorise l'outil, pas `"Write(*)"`. Claude ne peut pas modifier `settings.local.json` lui-même.
+
+---
+
+## Session 4, 04/11/2026
+
+**Fait** : inventaire et sauvegarde du poste ; architecture des consignes (`.claude/` versionné, règles par `paths`, pointeurs sans `@`, skills `vendor-`) ; passage en tout TSX avec le registre `lib/registre.ts` ; mise en ligne sur Vercel ; deux premiers contenus (`/blog/ia-et-musique`, `/labo/jeu-modes`).
+
+**Apprentissages Claude Code :**
+- La mémoire auto est locale à la machine : elle ne suit ni sur un autre poste ni dans le cloud
+- Un `@` dans `CLAUDE.md` charge le fichier à chaque session : pour un simple pointeur, écrire le chemin entre backticks
+- Les règles avec `paths` se chargent à la lecture ou à la modification d'un fichier correspondant
+- Skills : seule la forme `.claude/skills/<nom>/SKILL.md` est documentée, les dossiers de regroupement ne le sont pas
 
 ---
 
@@ -86,7 +102,7 @@ Keystatic sera retiré dès la session suivante : trop lourd pour un auteur uniq
 | Outil | Usage |
 |---|---|
 | `Agent` | Lancer un sous-agent spécialisé pour une tâche complexe |
-| `EnterPlanMode` | Passer en mode conception avant de toucher au code |
+| `EnterPlanMode` | Outil interne de Claude pour passer en mode plan. Côté utilisateur : `Maj+Tab` ou `/plan` |
 | `AskUserQuestion` | Poser une question avec choix clairs plutôt que de deviner |
 | `Bash` | Commandes shell (utiliser les outils dédiés dès que possible) |
 | `TaskCreate` / `TaskUpdate` | Découper et suivre le travail de la session en cours |
@@ -94,10 +110,11 @@ Keystatic sera retiré dès la session suivante : trop lourd pour un auteur uniq
 ### Slash commands utiles
 | Commande | Action |
 |---|---|
-| `/commit` | Créer un commit Git conventionnel |
-| `/pr` | Créer une pull request |
-| `/fast` | Basculer en mode rapide (même modèle, sortie plus rapide) |
+| `/plan` | Passer en mode plan |
+| `/fast` | Activer ou couper le mode rapide : Opus uniquement, jusqu'à 2,5 fois plus rapide, coût au token plus élevé, payé en crédits d'usage sur les abonnements |
 | `/help` | Aide Claude Code |
+
+`/commit` et `/pr` ne sont pas des commandes intégrées : il suffit de demander à Claude de commiter ou d'ouvrir une pull request.
 
 ---
 
@@ -105,7 +122,7 @@ Keystatic sera retiré dès la session suivante : trop lourd pour un auteur uniq
 
 1. Toujours lire un fichier avant de le modifier
 2. Expliquer ce que tu vas faire et pourquoi avant d'agir (surtout pour les changements multi-fichiers)
-3. Utiliser `EnterPlanMode` pour tout changement d'architecture non trivial
+3. Passer en mode plan (`Maj+Tab`) pour tout changement d'architecture non trivial
 4. Vérifier le rendu réel après un build réussi (curl, dev server)
 5. Commits conventionnels : `feat:`, `fix:`, `content:`, `chore:`, `doc:`
 6. MVP d'abord : ne pas complexifier sans vrai besoin
@@ -115,7 +132,6 @@ Keystatic sera retiré dès la session suivante : trop lourd pour un auteur uniq
 
 ## Informations Techniques
 
-- **Modèle** : Claude Sonnet 4.6
 - **Plateforme** : Windows 11, shell bash
 - **Node** : projet géré avec npm
 - **Langue** : français partout (UI, commits, commentaires, ce fichier)
