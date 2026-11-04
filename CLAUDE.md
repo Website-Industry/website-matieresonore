@@ -57,3 +57,4 @@ Le chargement automatique n'existe pas partout (les fils de projet cloud l'ignor
 - `journal/` : historique et apprentissage. À ne lire que sur demande
 - `A-FAIRE.md` : reste à faire technique. À lire avant de proposer la suite
 - `CLAUDE.local.md` (sur le poste de Marc, jamais versionné) : où trouver le pourquoi éditorial et les briefs de session, nommés `brief-AAAA-MM-JJ.md`. Absent : demander à Marc, ne rien deviner
+- Variables d'environnement (sessions cloud, définies dans l'environnement Claude Code, jamais versionnées) : `MATIERE_SONORE_DRIVE_PATH` (chemin du dossier Drive du projet) et `MATIERE_SONORE_DRIVE_FOLDER_ID` (identifiant de ce dossier). Elles remplacent `CLAUDE.local.md` dans le cloud. Absentes : demander à Marc, ne rien deviner
