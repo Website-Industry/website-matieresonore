@@ -101,6 +101,69 @@ function Piste({ numero, titre }: { numero: number; titre: string }) {
   )
 }
 
+type TonEncadre = 'depart' | 'voir' | 'retenir' | 'limite' | 'mode'
+const encadres: Record<TonEncadre, { label: string; couleur: string; fond: string }> = {
+  depart: { label: 'Le point de départ', couleur: BLEU, fond: 'rgba(0,150,199,0.06)' },
+  voir: { label: 'Ce qu\'on voit', couleur: VIOLET, fond: 'rgba(123,47,255,0.05)' },
+  retenir: { label: 'À retenir', couleur: ORANGE, fond: 'rgba(242,96,30,0.07)' },
+  limite: { label: 'La limite', couleur: 'var(--text-muted)', fond: 'rgba(13,26,46,0.04)' },
+  mode: { label: 'Mode d\'emploi', couleur: 'var(--accent-labo)', fond: 'rgba(31,184,102,0.07)' },
+}
+
+// Encadré explicatif : une étiquette et une liste de points courts
+function Encadre({ ton, label, points }: { ton: TonEncadre; label?: string; points: ReactNode[] }) {
+  const e = encadres[ton]
+  return (
+    <div className="my-6 rounded-r-xl border-l-4 px-5 py-4" style={{ borderColor: e.couleur, backgroundColor: e.fond }}>
+      <div className="mb-2 text-xs font-bold uppercase tracking-wide" style={{ color: e.couleur }}>
+        {label ?? e.label}
+      </div>
+      <div role="list" className="flex flex-col gap-2 text-[0.98rem] leading-relaxed text-[var(--text-primary)]">
+        {points.map((pt, i) => (
+          <div role="listitem" key={i} className="flex gap-3">
+            <span className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: e.couleur }} />
+            <span>{pt}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Raisonnement en chaîne : si... alors... donc...
+function Chaine({ titre, etapes }: { titre?: string; etapes: ReactNode[] }) {
+  return (
+    <div className="my-6">
+      {titre && (
+        <div className="mb-3 text-xs font-bold uppercase tracking-wide" style={{ color: ORANGE }}>{titre}</div>
+      )}
+      <div role="list" className="flex flex-col">
+        {etapes.map((et, i) => {
+          const mot = i === 0 ? 'Si' : i === etapes.length - 1 ? 'Donc' : 'Alors'
+          return (
+            <div role="listitem" key={i} className="flex gap-3">
+              <div className="flex flex-col items-center">
+                <span
+                  className="flex h-7 min-w-[3.4rem] items-center justify-center rounded-full px-2 text-xs font-bold"
+                  style={{
+                    backgroundColor: i === etapes.length - 1 ? ORANGE : 'var(--bg-card)',
+                    color: i === etapes.length - 1 ? '#0d1a2e' : 'var(--text-primary)',
+                    border: `2px solid ${ORANGE}`,
+                  }}
+                >
+                  {mot}
+                </span>
+                {i < etapes.length - 1 && <span className="w-0.5 flex-1 bg-[var(--accent-blog)] opacity-40" style={{ minHeight: 12 }} />}
+              </div>
+              <div className="pb-3 pt-0.5 text-[0.98rem] leading-relaxed text-[var(--text-primary)]">{et}</div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 /* ── Données ───────────────────────────────────────────────── */
 
 type Qualite = 'M' | 'm' | 'J'
@@ -143,6 +206,15 @@ export default function GammeMineureNaturellePage() {
           <div className="mb-6 mt-4 h-1 w-10 rounded" style={{ backgroundColor: ORANGE }} />
 
           <p><em>Une asymétrie qui m'a longtemps gratté, et ce qu'elle raconte de notre système.</em></p>
+
+          <Encadre
+            ton="depart"
+            points={[
+              <>La gamme majeure, vue depuis sa tonique : tous ses intervalles sont <strong>majeurs ou justes</strong>. Propre.</>,
+              <>On s'attendrait à ce que la gamme mineure naturelle soit son miroir : tous ses intervalles <strong>mineurs ou justes</strong>.</>,
+              <>Ce n'est pas tout à fait le cas : un intervalle résiste, <strong>la seconde reste majeure</strong>.</>,
+            ]}
+          />
 
           {/* ── Le problème en un coup d'œil ── */}
           <Carte className="my-8">
@@ -187,16 +259,50 @@ export default function GammeMineureNaturellePage() {
               <span><b>J</b> juste</span>
               <span><b style={{ color: 'var(--accent-blog-ink)' }}>□</b> l'intrus</span>
             </div>
+            <div className="mt-3 text-xs text-[var(--text-muted)]">Une ligne par gamme, une case par intervalle mesuré depuis Do.</div>
           </Carte>
 
-          <p>Un « mineur pur » existe : c'est le phrygien. Une seule note le sépare du mineur naturel, la deuxième. Pourquoi notre musique a-t-elle choisi l'autre ?</p>
+          <Encadre
+            ton="voir"
+            label="La question"
+            points={[
+              <>Un mineur « pur », vraiment symétrique du majeur, existe : c'est le <strong>phrygien</strong>, avec sa seconde mineure (dernière ligne de la grille).</>,
+              <>Entre le mineur naturel (qu'on appelle aussi éolien) et le phrygien, <strong>une seule note change</strong> : la deuxième, Ré ou Ré♭.</>,
+              <>Alors pourquoi notre musique a-t-elle pris le mineur naturel comme mineur de référence, et pas le phrygien ?</>,
+            ]}
+          />
 
           <ComparateurModes />
 
-          <p>J'ai creusé quatre pistes. Aucune ne suffit seule ; ensemble, elles racontent quelque chose.</p>
+          <Encadre
+            ton="mode"
+            points={[
+              <>Choisissez une gamme : le clavier montre ses notes à partir de Do.</>,
+              <><strong style={{ color: BLEU }}>Bleu</strong> : la note est la même qu'en majeur. <strong style={{ color: VIOLET }}>Violet</strong> : elle est abaissée.</>,
+              <>Les barres du dessous : l'écart entre deux notes voisines, un ton ou un demi-ton (½). La première barre, en orange, c'est la seconde.</>,
+              <>Passez de <em>Mineur naturel</em> à <em>Phrygien</em> : seule la première barre change.</>,
+            ]}
+          />
+
+          <p>J'ai creusé quatre pistes. Aucune ne suffit seule ; ensemble, elles racontent quelque chose :</p>
+          <ol>
+            <li><strong>L'histoire</strong> : d'où vient le mineur naturel.</li>
+            <li><strong>La fonction</strong> : ce que chaque gamme permet de construire comme accords.</li>
+            <li><strong>L'oreille</strong> : comment chaque gamme conclut.</li>
+            <li><strong>La culture</strong> : un autre choix était-il possible ?</li>
+          </ol>
 
           {/* ── Piste 1 ── */}
           <Piste numero={1} titre="L'histoire, par relativité" />
+
+          <Encadre
+            ton="depart"
+            points={[
+              <>Le mineur naturel n'a pas été construit comme un miroir du majeur : il en <strong>dérive</strong>.</>,
+              <>La mineur reprend exactement les notes de Do majeur, en partant de La. C'est ce qu'on appelle la <strong>relativité</strong> (La mineur est le relatif de Do majeur).</>,
+              <>Le schéma ci-dessous le montre sur les touches blanches, qui forment Do majeur.</>,
+            ]}
+          />
 
           <Carte className="my-6">
             <Titre>Mêmes touches blanches, deux départs</Titre>
@@ -218,12 +324,38 @@ export default function GammeMineureNaturellePage() {
             </div>
           </Carte>
 
-          <p>La seconde La → Si est majeure parce qu'elle l'est déjà dans Do majeur. Vrai, mais ça déplace la question : pourquoi La, et pas Mi ?</p>
+          <Encadre
+            ton="voir"
+            points={[
+              <>En partant de La, le premier pas La → Si est <strong>un ton</strong> : seconde majeure.</>,
+              <>En partant de Mi, le premier pas Mi → Fa est <strong>un demi-ton</strong> : seconde mineure, le phrygien.</>,
+              <>La seconde du mineur naturel est donc majeure tout simplement parce qu'elle l'est déjà dans Do majeur.</>,
+            ]}
+          />
+
+          <Encadre
+            ton="limite"
+            points={[
+              <>C'est vrai, et c'est intéressant. Mais ça déplace la question plus que ça n'y répond.</>,
+              <>Pourquoi avoir retenu le départ sur La, et pas sur Mi, qui donne le phrygien avec les mêmes touches ?</>,
+              <>Pour répondre, il faut regarder ce qu'on <strong>fait</strong> avec ces gammes : les accords.</>,
+            ]}
+          />
 
           {/* ── Piste 2 ── */}
           <Piste numero={2} titre="La fonction, ou le problème de la dominante" />
 
-          <p>Le geste central du tonal : <strong>V → I</strong>. Il faut un V majeur, avec une sensible un demi-ton sous la tonique. Combien de retouches pour l'obtenir ?</p>
+          <p>C'est l'argument qui m'a convaincu.</p>
+
+          <Encadre
+            ton="depart"
+            points={[
+              <>Notre musique tonale tourne autour d'un geste : la <strong>dominante</strong> (l'accord du Ve degré) qui retombe sur la <strong>tonique</strong>. On l'écrit <strong>V → I</strong>.</>,
+              <>Pour que ce geste marche, l'accord de dominante doit être <strong>majeur</strong>.</>,
+              <>Il doit contenir la <strong>sensible</strong> : la note un demi-ton sous la tonique. En Do, c'est Si.</>,
+              <>Le test : prendre le Ve degré de chaque gamme et compter les notes à corriger pour obtenir cette dominante (ici G7 : Sol, Si, Ré, Fa).</>,
+            ]}
+          />
 
           <div className="my-6 grid gap-4 sm:grid-cols-2">
             <Carte>
@@ -272,8 +404,27 @@ export default function GammeMineureNaturellePage() {
             </Carte>
           </div>
 
+          <Encadre
+            ton="voir"
+            points={[
+              <><strong>Mineur naturel</strong> : le Ve degré donne Sol mineur (Sol, Si♭, Ré). On remonte le Si♭ en Si, et on a G7. <strong>Une seule retouche.</strong> C'est d'ailleurs comme ça qu'est né le mineur harmonique.</>,
+              <><strong>Phrygien</strong> : le Ve degré donne Sol, Si♭, <strong>Ré♭</strong>, un accord diminué. Il faut remonter le Si♭ <em>et</em> le Ré♭.</>,
+              <>Or le Ré♭, c'est précisément la note qui fait le phrygien. <strong>Le corriger, c'est quitter le mode.</strong></>,
+            ]}
+          />
+
+          <Encadre
+            ton="depart"
+            label="Et si on trichait ?"
+            points={[
+              <>On a bien retouché le mineur naturel pour obtenir le mineur harmonique. Faisons pareil avec le phrygien.</>,
+              <>On remonte seulement la 7e : Do, Ré♭, Mi♭, Fa, Sol, La♭, <strong>Si</strong>. Un « phrygien harmonique ».</>,
+              <>Son Ve degré devient Sol, Si, Ré♭.</>,
+            ]}
+          />
+
           <Carte className="my-6">
-            <Titre>Et un « phrygien harmonique » ?</Titre>
+            <Titre>Et un « phrygien harmonique » ?</Titre>
             <div className="mt-3 flex flex-wrap items-center gap-1.5">
               <Note couleur={BLEU}>Sol</Note>
               <Note couleur={BLEU}>Si</Note>
@@ -281,6 +432,16 @@ export default function GammeMineureNaturellePage() {
             </div>
             <Verdict ok={false}>Quinte diminuée : toujours pas de dominante</Verdict>
           </Carte>
+
+          <Encadre
+            ton="depart"
+            label="Un bonus du mineur naturel"
+            points={[
+              <>Son IIe degré, Ré diminué (Ré, Fa, La♭), prépare G7 en douceur.</>,
+              <>Le Ré et le Fa restent en place, le La♭ descend d'un demi-ton sur le Sol.</>,
+              <>Ça donne un II-V-I mineur, le schéma ci-dessous suit chaque note.</>,
+            ]}
+          />
 
           <Carte className="my-6">
             <Titre>Le II-V-I mineur, parfaitement huilé</Titre>
@@ -303,12 +464,30 @@ export default function GammeMineureNaturellePage() {
             </div>
           </Carte>
 
-          <p>La seconde majeure n'est pas un détail : elle laisse la place au <strong>Ré naturel</strong>, la quinte de la dominante.</p>
+          <Chaine
+            titre="Le raisonnement"
+            etapes={[
+              <>la gamme garde une <strong>seconde majeure</strong> (Ré naturel)</>,
+              <>le Ré est disponible pour l'accord du Ve degré, dont il est la quinte</>,
+              <>une seule retouche (Si♭ → Si) suffit pour une vraie dominante</>,
+              <>la seconde majeure n'est pas un détail : sans elle, <strong>pas de V → I solide</strong>.</>,
+            ]}
+          />
 
           {/* ── Le napolitain ── */}
           <h2>Attention, le ♭II n'est pas interdit</h2>
 
-          <p>C'est mon passage préféré de cette histoire. La musique classique a un nom pour cet accord : l'<strong>accord napolitain</strong>.</p>
+          <p>C'est mon passage préféré de cette histoire.</p>
+
+          <Encadre
+            ton="depart"
+            points={[
+              <>On entend parfois qu'un accord sur le IIe degré abaissé (le <strong>♭II</strong>, l'accord phrygien) « ne fonctionne pas » en tonal.</>,
+              <>C'est faux : la musique classique lui a même donné un nom, l'<strong>accord napolitain</strong>.</>,
+              <>En Do mineur, c'est Ré♭ majeur, joué le plus souvent en premier renversement : Fa, La♭, Ré♭ (d'où le « 6 » de ♭II6).</>,
+              <>Il mène très bien à la dominante, puis à la tonique.</>,
+            ]}
+          />
 
           <Carte className="my-6">
             <Titre>La cadence napolitaine en Do mineur</Titre>
@@ -329,6 +508,8 @@ export default function GammeMineureNaturellePage() {
               ))}
             </div>
           </Carte>
+
+          <p>Une cadence standard, qu'on croise chez Mozart, Beethoven ou Chopin. La frise replace ces noms dans le temps, du moment où l'on nomme les modes jusqu'au flamenco.</p>
 
           <Carte className="my-6">
             <Titre>Le phrygien à travers le temps</Titre>
@@ -352,10 +533,25 @@ export default function GammeMineureNaturellePage() {
             </div>
           </Carte>
 
-          <p>Le phrygien n'a pas été chassé : il est entré par la petite porte, comme couleur d'emprunt. Ce qu'il ne pouvait pas faire, c'est fournir la dominante lui-même.</p>
+          <Encadre
+            ton="retenir"
+            points={[
+              <>Le phrygien n'a pas été chassé de la musique tonale.</>,
+              <>Il y est entré par la petite porte, comme une <strong>couleur d'emprunt</strong> posée juste avant la dominante.</>,
+              <>Ce qu'il ne pouvait pas faire, c'est fournir la dominante lui-même.</>,
+            ]}
+          />
 
           {/* ── Piste 3 ── */}
           <Piste numero={3} titre="L'oreille, par en dessus ou par en dessous" />
+
+          <Encadre
+            ton="depart"
+            points={[
+              <>Pour conclure, chaque système compte sur une note très <strong>attirée par la tonique</strong>, à un demi-ton d'elle.</>,
+              <>Ce qui change, c'est le côté d'où elle arrive.</>,
+            ]}
+          />
 
           <div className="my-6 grid gap-4 sm:grid-cols-2">
             {[
@@ -379,6 +575,16 @@ export default function GammeMineureNaturellePage() {
             ))}
           </div>
 
+          <Encadre
+            ton="voir"
+            points={[
+              <><strong>Tonal classique</strong> : la note attirée arrive par en dessous. C'est la sensible, Si → Do, un demi-ton qui monte.</>,
+              <><strong>Phrygien</strong> : elle arrive par en dessus. Ré♭ → Do, un demi-ton qui descend.</>,
+              <>Ça donne une autre couleur de conclusion : la cadence <strong>♭II → I</strong>.</>,
+              <>Si elle vous dit quelque chose, c'est normal : c'est la fin de la cadence andalouse, l'ossature du flamenco.</>,
+            ]}
+          />
+
           <Carte className="my-6">
             <Titre>La cadence andalouse</Titre>
             <div className="mb-4 text-sm text-[var(--text-muted)]">L'ossature du flamenco finit sur ce geste.</div>
@@ -393,10 +599,37 @@ export default function GammeMineureNaturellePage() {
             </div>
           </Carte>
 
+          <Encadre
+            ton="retenir"
+            points={[
+              <>Dans la cadence andalouse, le Fa qui tombe sur le Mi, c'est exactement le geste ♭II → I.</>,
+              <>Deux polarités, deux mondes : l'une tire vers la tonique <strong>en montant</strong>, l'autre <strong>en descendant</strong>.</>,
+            ]}
+          />
+
           {/* ── Piste 4 ── */}
           <Piste numero={4} titre="Nature ou convention ?" />
 
-          <p>On a bien inventé le mineur harmonique pour fabriquer une sensible. Un phrygien retouché aurait-il fait l'affaire ?</p>
+          <p>Reste la question qui me travaille le plus.</p>
+
+          <Encadre
+            ton="depart"
+            points={[
+              <>On a bien « inventé » le mineur harmonique pour fabriquer une sensible qui n'existait pas.</>,
+              <>Si l'histoire avait choisi le phrygien comme mineur de référence, on aurait pu le bricoler de la même façon.</>,
+              <>Nos oreilles trouveraient-elles ça naturel aujourd'hui ? En partie, oui : ce qu'on trouve « naturel » est largement <strong>culturel</strong>.</>,
+            ]}
+          />
+
+          <Chaine
+            titre="Mais la piste 2 pose une limite"
+            etapes={[
+              <>l'histoire avait choisi le <strong>phrygien</strong> comme mineur de référence</>,
+              <>on l'aurait retouché, mais il n'aurait jamais donné une dominante aussi solide</>,
+              <>la musique se serait organisée autour de la descente ♭II → I plutôt qu'autour de V → I</>,
+              <>on aurait eu un système <strong>plus modal que tonal</strong>.</>,
+            ]}
+          />
 
           <div className="my-6 grid gap-4 sm:grid-cols-2">
             <Carte>
@@ -425,7 +658,7 @@ export default function GammeMineureNaturellePage() {
             ))}
           </div>
 
-          <p>Cette seconde majeure qui « dépasse » n'est pas une anomalie. C'est la trace d'un choix : celui d'un système qui met la dominante au centre de tout.</p>
+          <p>Cette seconde majeure qui « dépasse » n'est pas une anomalie. C'est la trace d'un choix : celui d'un système qui met la dominante au centre de tout.</p>
 
           <p>Le phrygien, lui, attend juste avant la cadence, sous le nom d'accord napolitain. Et ailleurs, il est chez lui.</p>
         </article>
