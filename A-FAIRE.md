@@ -8,7 +8,7 @@ Reste à faire technique. Le pourquoi éditorial vit dans le projet Claude.
 
 ## Structure du site
 
-- [ ] Navigation générale : pas d'en-tête pour l'instant
+- [x] Navigation générale
 - [ ] Pied de page
 - [ ] Page « À propos » : structure technique, le texte vient du projet Claude
 
@@ -17,11 +17,11 @@ Reste à faire technique. Le pourquoi éditorial vit dans le projet Claude.
 - [ ] Valider à l'œil les accents par type (tags, vert du Labo)
 - [ ] Relire l'accueil d'après la maquette « v5 » de la conversation fondatrice
 - [ ] Ondes SVG : prévues par l'identité, pas encore présentes
-- [ ] Contraste du message d'attente sur le bandeau Labo (2,95:1)
 
 ## Build et qualité
 
 - [ ] Build : `next/font/google` télécharge les polices au build ; sans accès à `fonts.googleapis.com`, il échoue (environnement cloud à surveiller)
+- [ ] `npm run dev` : erreur 500 sur toutes les pages sur le poste de Marc (Turbopack, `next/font/google queries have exactly one entry`), cause non trouvée ; contournement : `npx next dev --webpack`
 - [ ] Lint : ni script ni ESLint
 
 ## Claude Code

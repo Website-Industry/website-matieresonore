@@ -24,17 +24,19 @@ Le bleu justifie la couleur. Les ondes SVG justifient les formes.
 
 - Light mode, fond crème chaud
 - Syne pour les titres (display, bold), DM Sans pour le texte (body, léger)
-- Strip Labo en sombre : zone de respiration dans l'ensemble clair
+- Accueil en deux colonnes égales sur le fond crème, Blog à gauche et Labo à droite ; aucun espace ne doit paraître secondaire
+- En-tête collant sur toutes les pages : marque en cercles concentriques et nom à gauche, liens Blog et Labo à droite soulignés à la couleur de leur type
 
 ## Palette
 
 - `--bg-base` : #f7f4ef (fond crème chaud, jamais blanc pur)
 - `--bg-card` : #ffffff (cartes, contraste sur le crème)
-- `--bg-dark` : #0d1a2e (strip Labo, sections sombres)
+- `--bg-dark` : #0d1a2e (sections sombres éventuelles, blocs de code)
 - `--text-primary` : #0d1a2e
 - `--text-muted` : #556677
 - `--accent-blue` : #0096c7 (bleu électrique, couleur signature globale)
 - `--accent-purple` : #7b2fff (violet, accent secondaire)
+- `--line` : rgba(13, 26, 46, 0.1) (filets et bordures discrètes)
 
 ## Accents par type
 
@@ -46,7 +48,7 @@ Le bleu justifie la couleur. Les ondes SVG justifient les formes.
 
 ## Motifs
 
-- Ondes SVG en arrière-plan, motif physique récurrent : hero, thumbnails de cards, strip Labo
+- Ondes SVG en arrière-plan, motif physique récurrent : hero, thumbnails de cards
 - Cercles concentriques : ils évoquent la propagation d'une onde dans l'eau, pas la décoration
 
 ## Règles
