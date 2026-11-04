@@ -27,7 +27,7 @@ Reste à faire technique. Le pourquoi éditorial vit dans le projet Claude.
 ## Claude Code
 
 - [ ] Environnement Claude Code cloud : pas encore créé
-  - [ ] Script d'initialisation de l'environnement (privé, hors dépôt) qui écrit l'emplacement du Drive, comme `CLAUDE.local.md` sur le poste
+  - [x] Script d'initialisation de l'environnement (privé, hors dépôt) qui écrit l'emplacement du Drive, comme `CLAUDE.local.md` sur le poste
   - [ ] Tester si une session cloud a accès au connecteur Google Drive ; sinon, coller le brief dans le premier message
 - [ ] Skills `nouvel-article` et `nouveau-projet-labo`, à écrire en prenant les deux pages publiées comme modèles
 - [ ] Hook de formatage
