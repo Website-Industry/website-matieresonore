@@ -21,7 +21,7 @@ Reste à faire technique. Le pourquoi éditorial vit dans le projet Claude.
 ## Build et qualité
 
 - [ ] Build : `next/font/google` télécharge les polices au build ; sans accès à `fonts.googleapis.com`, il échoue (environnement cloud à surveiller)
-- [ ] `npm run dev` : erreur 500 sur toutes les pages sur le poste de Marc (Turbopack, `next/font/google queries have exactly one entry`), cause non trouvée ; contournement : `npx next dev --webpack`
+- [ ] `npm run dev` : erreur 500 sur toutes les pages sur le poste de Marc (Turbopack, `next/font/google queries have exactly one entry`), cause non trouvée ; contournement : `npx next dev --webpack`. La même erreur a fait échouer un build Vercel le 5/11 (`content/a-propos`, commit `e918f54`) ; le même commit redéployé est passé : bug intermittent, à surveiller avant chaque fusion sur `main`
 - [ ] Lint : ni script ni ESLint
 
 ## Claude Code
