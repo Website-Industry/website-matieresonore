@@ -10,7 +10,7 @@ Reste à faire technique. Le pourquoi éditorial vit dans le projet Claude.
 
 - [x] Navigation générale
 - [ ] Pied de page
-- [ ] Page « À propos » : structure technique, le texte vient du projet Claude
+- [ ] Page « À propos » : structure et premier texte en ligne ; parcours de Marc et Ghost-Note en placeholders, texte à valider dans le projet Claude
 
 ## Identité visuelle
 
