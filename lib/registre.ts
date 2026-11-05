@@ -62,6 +62,14 @@ export const registre: EntreePage[] = [
     extrait: "On règle un son et une fréquence d'échantillonnage : au-delà de la fréquence de Nyquist, la fréquence fantôme apparaît, à l'écran et à l'oreille.",
     tags: ['son numérique', 'technique'],
   },
+  {
+    slug: 'serie-harmonique',
+    type: ['labo'],
+    titre: 'La série harmonique, une à une',
+    date: '2026-11-05',
+    extrait: "Seize harmoniques à activer, couper et écouter : d'où viennent le timbre, l'accord majeur et les notes qui ne tombent pas sur le piano.",
+    tags: ['théorie', 'harmonie'],
+  },
 ]
 
 export function listerParType(type: TypePage): EntreePage[] {

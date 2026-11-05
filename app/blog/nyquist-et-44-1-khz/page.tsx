@@ -41,7 +41,7 @@ export default function NyquistPage() {
 
           <p>Cette moitié porte un nom, la fréquence de Nyquist. À 48 kHz, elle vaut 24 kHz. À 44,1 kHz, 22,05 kHz.</p>
 
-          <p>Une précision qui compte : ce qu'on reconstruit proprement, ce sont des sinusoïdes. Un signal carré à 24 kHz n'est pas une simple onde à 24 kHz. Il contient des harmoniques bien plus hautes (72 kHz, 120 kHz...), impossibles à capturer à 48 kHz. Il ressortira déformé.</p>
+          <p>Une précision qui compte : ce qu'on reconstruit proprement, ce sont des sinusoïdes. Un signal carré à 24 kHz n'est pas une simple onde à 24 kHz. Il contient des harmoniques bien plus hautes (72 kHz, 120 kHz...), impossibles à capturer à 48 kHz. Il ressortira déformé. Pour entendre et voir comment des harmoniques construisent une forme d'onde, le Labo a une page sur la <Link href="/labo/serie-harmonique">série harmonique</Link>.</p>
 
           <h2>Au-delà : les fréquences fantômes</h2>
 
