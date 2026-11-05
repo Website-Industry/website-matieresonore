@@ -25,7 +25,7 @@ Le bleu justifie la couleur. Les ondes SVG justifient les formes.
 - Light mode, fond crème chaud
 - Syne pour les titres (display, bold), DM Sans pour le texte (body, léger)
 - Accueil en deux colonnes égales sur le fond crème, Blog à gauche et Labo à droite ; aucun espace ne doit paraître secondaire
-- En-tête collant sur toutes les pages : marque en cercles concentriques et nom à gauche, liens Blog et Labo à droite soulignés à la couleur de leur type
+- En-tête collant sur toutes les pages : marque en cercles concentriques et nom à gauche, liens Blog et Labo à droite soulignés à la couleur de leur type, puis À propos souligné en bleu signature
 
 ## Palette
 

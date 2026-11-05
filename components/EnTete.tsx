@@ -3,6 +3,8 @@ import Link from 'next/link'
 const liens = [
   { href: '/blog', libelle: 'Blog', couleur: 'var(--accent-blog)' },
   { href: '/labo', libelle: 'Labo', couleur: 'var(--accent-labo)' },
+  // Ni Blog ni Labo : la couleur signature
+  { href: '/a-propos', libelle: 'À propos', couleur: 'var(--accent-blue)' },
 ]
 
 const focusClavier =
@@ -59,7 +61,7 @@ export default function EnTete() {
             <Link
               key={lien.href}
               href={lien.href}
-              className={`group relative inline-block px-1 py-1 text-sm font-bold text-[var(--text-primary)] min-[380px]:text-base min-[760px]:px-3 ${focusClavier}`}
+              className={`group relative inline-block whitespace-nowrap px-1 py-1 text-[0.8125rem] font-bold text-[var(--text-primary)] min-[380px]:text-base min-[760px]:px-3 ${focusClavier}`}
               style={{ fontFamily: 'var(--font-syne)' }}
             >
               {lien.libelle}
