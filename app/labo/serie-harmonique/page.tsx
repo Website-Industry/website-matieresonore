@@ -46,7 +46,7 @@ export default function SerieHarmoniquePage() {
 
           <h2>Ce qu&apos;il faut regarder</h2>
 
-          <p><strong>La forme de l&apos;onde.</strong> La fondamentale seule donne une sinusoïde. Avec toutes les harmoniques, chacune à une amplitude de 1/n, on s&apos;approche d&apos;une onde en dents de scie. Avec les harmoniques impaires seulement, on s&apos;approche d&apos;un signal carré.</p>
+          <p><strong>La forme de l&apos;onde.</strong> La fondamentale seule donne une sinusoïde. Avec toutes les harmoniques, chacune à une amplitude de 1/n, on s&apos;approche d&apos;une onde en dents de scie. Avec les harmoniques impaires seulement, on s&apos;approche d&apos;un signal carré. Le chemin inverse, retrouver les harmoniques d&apos;une forme d&apos;onde quelconque, c&apos;est la <Link href="/labo/transformee-de-fourier">transformée de Fourier</Link>.</p>
 
           <p>C&apos;est ce signal carré qui pose problème en numérique : ses harmoniques montent bien au-delà de la fondamentale. L&apos;article <Link href="/blog/nyquist-et-44-1-khz">Nyquist, le repliement et le mystère du 44,1 kHz</Link> raconte pourquoi un carré à 24 kHz ressort déformé à 48 kHz, et le <Link href="/labo/simulateur-repliement">simulateur de repliement</Link> montre ce que deviennent les fréquences trop hautes.</p>
 

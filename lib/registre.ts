@@ -70,6 +70,14 @@ export const registre: EntreePage[] = [
     extrait: "Seize harmoniques à activer, couper et écouter : d'où viennent le timbre, l'accord majeur et les notes qui ne tombent pas sur le piano.",
     tags: ['théorie', 'harmonie'],
   },
+  {
+    slug: 'transformee-de-fourier',
+    type: ['labo'],
+    titre: 'La transformée de Fourier, à main levée',
+    date: '2026-11-05',
+    extrait: "On choisit ou on dessine une forme d'onde, et on voit apparaître ses harmoniques : le spectre, la reconstruction terme à terme, et le son qui va avec.",
+    tags: ['son numérique', 'technique'],
+  },
 ]
 
 export function listerParType(type: TypePage): EntreePage[] {
