@@ -49,6 +49,8 @@ export default function NyquistPage() {
 
           <p>Les échantillons pris sur ce 26 kHz sont exactement ceux qu'on aurait pris sur une onde à 48 − 26 = 22 kHz. Le système ne peut pas faire la différence : il reconstruit un 22 kHz qui n'a jamais existé dans le son d'origine. C'est le repliement, ou <em>aliasing</em>. Une fréquence fantôme, qui reflète l'original comme un miroir posé sur la fréquence de Nyquist.</p>
 
+          <p>Pour le voir et l'entendre, le Labo a un <Link href="/labo/simulateur-repliement">simulateur de repliement</Link> : on règle les deux fréquences, et le fantôme apparaît.</p>
+
           <p>D'où une pièce indispensable avant toute conversion : le filtre anti-repliement, un passe-bas qui coupe tout ce qui dépasse la fréquence de Nyquist.</p>
 
           <p>Seulement, un vrai filtre ne coupe pas à la verticale. Il lui faut une pente, une zone de transition. Le signal utile plafonne donc plutôt vers 20 à 22 kHz. Bonne nouvelle : l'oreille humaine s'arrête autour de 20 kHz, et moins avec l'âge. À 44,1 kHz, la zone de transition s'étale de 20 kHz à 22,05 kHz : environ 2 kHz de marge, sans rien toucher d'audible.</p>
