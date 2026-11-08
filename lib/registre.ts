@@ -78,6 +78,14 @@ export const registre: EntreePage[] = [
     extrait: "On choisit ou on dessine une forme d'onde, et on voit apparaître ses harmoniques : le spectre, la reconstruction terme à terme, et le son qui va avec.",
     tags: ['son numérique', 'technique'],
   },
+  {
+    slug: 'intervalles',
+    type: ['labo'],
+    titre: "Reconnaître les intervalles à l'oreille",
+    date: '2026-11-08',
+    extrait: 'Les 12 intervalles, de la seconde mineure à l\'octave, chacun avec ses chansons repères en montant et en descendant, à écouter sur YouTube.',
+    tags: ['théorie', 'écoute'],
+  },
 ]
 
 export function listerParType(type: TypePage): EntreePage[] {
