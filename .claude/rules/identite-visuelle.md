@@ -57,3 +57,12 @@ Le bleu justifie la couleur. Les ondes SVG justifient les formes.
 - Le violet vient jouer avec le bleu, jamais seul en dominante
 - Cartes toujours fond blanc sur fond crème, jamais d'alternance dans une grille
 - Le blanc peut apparaître en interaction : retournement de carte au clic
+- Toujours le style Matière Sonore : une maquette ou une page proposée (HTML d'un projet Claude, cheat sheet, page externe) apporte son contenu et son comportement, jamais son style. Palette, typographies et cartes sont celles de ce fichier, sur le Blog comme dans le Labo
+
+## Mode sombre (à venir)
+
+Pas encore en place. Piste validée par Marc, tirée de la maquette de la page Intervalles, à adapter aux accents du site le moment venu :
+
+- Fond `#111317`, cartes `#1c1f26`, cartes au survol `#22262f`, fond de zone dépliée `#161820`
+- Texte `#e8eaf0`, texte secondaire `#b0b4c0`, texte discret `#7a7e8a`
+- Bordures `#2a2d36`

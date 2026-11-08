@@ -8,7 +8,7 @@ paths:
 - Intention : construire, approfondir, transmettre
 - Formats : ressource documentaire, outil interactif, page expérimentale
 - Une ressource peut évoluer en outil pédagogique, pas de frontière stricte
-- Chaque page est un projet indépendant, libre techniquement : son propre univers, son code spécifique, son interactivité
+- Chaque page est un projet indépendant, libre techniquement : son code spécifique, son interactivité. Le visuel reste celui de Matière Sonore (voir `identite-visuelle.md`)
 - Texte que Marc n'a pas encore fourni : `[NOM PAGE LABO]`
 
 ## Inscription obligatoire

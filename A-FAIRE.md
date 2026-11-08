@@ -17,12 +17,13 @@ Reste à faire technique. Le pourquoi éditorial vit dans le projet Claude.
 - [ ] Valider à l'œil les accents par type (tags, vert du Labo)
 - [ ] Relire l'accueil d'après la maquette « v5 » de la conversation fondatrice
 - [ ] Ondes SVG : prévues par l'identité, pas encore présentes
+- [ ] Mode sombre : à construire à partir de la piste notée dans `.claude/rules/identite-visuelle.md`
 
 ## Build et qualité
 
 - [ ] Build : `next/font/google` télécharge les polices au build ; sans accès à `fonts.googleapis.com`, il échoue (environnement cloud à surveiller)
 - [ ] `npm run dev` : erreur 500 sur toutes les pages sur le poste de Marc (Turbopack, `next/font/google queries have exactly one entry`), cause non trouvée ; contournement : `npx next dev --webpack`
-- [ ] Lint : ni script ni ESLint
+- [ ] Mettre en place un lint (ESLint et un script `npm run lint`) : aujourd'hui ni l'un ni l'autre, la vérification repose sur le build
 
 ## Claude Code
 
