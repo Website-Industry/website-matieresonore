@@ -86,6 +86,14 @@ export const registre: EntreePage[] = [
     extrait: 'Les 12 intervalles, de la seconde mineure à l\'octave, chacun avec ses chansons repères en montant et en descendant, à écouter sur YouTube.',
     tags: ['théorie', 'écoute'],
   },
+  {
+    slug: 'rapport-signal-bruit',
+    type: ['labo'],
+    titre: 'Le rapport signal/bruit, à voir et à bidouiller',
+    date: '2026-11-19',
+    extrait: "Deux sources de souffle dans une chaîne numérique : le niveau d'enregistrement et la résolution en bits. On bouge les curseurs, on voit le bruit apparaître.",
+    tags: ['son numérique', 'technique'],
+  },
 ]
 
 export function listerParType(type: TypePage): EntreePage[] {
